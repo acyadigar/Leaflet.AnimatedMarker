@@ -97,6 +97,15 @@ L.AnimatedMarker = L.Marker.extend({
     }
   },
 
+  // Reset the animation and get to the first point
+  reset: function() {
+    this.stop()
+    if (this._icon) { this._icon.style[L.DomUtil.TRANSITION] = ('all ' + 0 + 'ms linear'); }
+    if (this._shadow) { this._shadow.style[L.DomUtil.TRANSITION] = 'all ' + 0 + 'ms linear'; }
+    this.initialize(this._latlngs);
+    this.setLatLng(this._latlngs[0]);
+  },
+
   setLine: function(latlngs){
     if (L.DomUtil.TRANSITION) {
       // No need to to check up the line if we can animate using CSS3
